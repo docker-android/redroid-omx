@@ -1,0 +1,103 @@
+
+cc_library_shared {
+    name: "libstagefright_redroid_omx",
+    vendor: true,
+
+    srcs: [
+        "SimpleRedroidOMXComponent.cpp",
+        "RedroidOMXComponent.cpp",
+        "RedroidVideoDecoderOMXComponent.cpp",
+        "RedroidVideoEncoderOMXComponent.cpp",
+    ],
+
+    export_include_dirs: [
+        "include",
+        "include/media/openmax",
+    ],
+
+    shared_libs: [
+        "libstagefright_foundation",
+        "liblog",
+        "libui",
+        "libutils",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+        "-Wno-unused-parameter",
+        "-Wno-documentation",
+    ],
+
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+            "unsigned-integer-overflow",
+        ],
+        cfi: true,
+    },
+}
+
+cc_library_shared {
+    name: "libstagefrighthw",
+    vendor: true,
+
+    srcs: [
+        "RedroidOMXPlugin.cpp",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    shared_libs: [
+        "libstagefright_redroid_omx",
+        "libstagefright_foundation",
+        "liblog",
+        "libutils",
+        "libbase",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+        "-Wno-unused-parameter",
+        "-Wno-documentation",
+    ],
+
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+            "unsigned-integer-overflow",
+        ],
+        cfi: true,
+    },
+}
+
+cc_defaults {
+    name: "libstagefright_redroid_omx-defaults",
+    vendor: true,
+
+    cflags: [
+        "-Werror",
+    ],
+
+    shared_libs: [
+        "libstagefright_redroid_omx",
+        "libstagefright_foundation",
+        "libutils",
+        "liblog",
+    ],
+
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+            "unsigned-integer-overflow",
+        ],
+        cfi: true,
+    },
+
+    compile_multilib: "32",
+}
+
+subdirs = [ "codecs/*" ]

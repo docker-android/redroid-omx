@@ -1,0 +1,4 @@
+// fix for <= Android 8.1
+// build/soong/root.bp
+
+subdirs = [ "*" ]

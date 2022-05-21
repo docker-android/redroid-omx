@@ -1,0 +1,16 @@
+cc_library_shared {
+    name: "libstagefright_redroid_avcenc",
+    defaults: ["libstagefright_redroid_omx-defaults"],
+
+    srcs: ["RedroidAVCEnc.cpp"],
+
+    header_libs: [
+        "libnativebase_headers",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Wno-unused-variable",
+    ],
+    ldflags: ["-Wl,-Bsymbolic"],
+}
