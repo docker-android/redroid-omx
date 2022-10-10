@@ -1,9 +1,7 @@
 DEVICE_MANIFEST_FILE += hardware/redroid/omx/android.hardware.media.omx@1.0.xml
 
 PRODUCT_PACKAGES += \
-    libstagefrighthw_32 \
-    libstagefright_redroid_avcenc \
-    libmedia_codec_32 \
+    libstagefrighthw \
 
 PRODUCT_COPY_FILES += \
     hardware/redroid/omx/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \

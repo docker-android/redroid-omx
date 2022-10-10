@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 
 #pragma once
 
-#include <media/stagefright/foundation/ABase.h>
 #include <media/hardware/OMXPluginBase.h>
 
 namespace android {
 
 struct RedroidOMXPlugin : public OMXPluginBase {
     RedroidOMXPlugin();
+    virtual ~RedroidOMXPlugin();
 
     virtual OMX_ERRORTYPE makeComponentInstance(
             const char *name,
@@ -43,7 +43,30 @@ struct RedroidOMXPlugin : public OMXPluginBase {
             Vector<String8> *roles);
 
 private:
-    DISALLOW_EVIL_CONSTRUCTORS(RedroidOMXPlugin);
+    void *mLibHandle;
+
+    typedef OMX_ERRORTYPE (*InitFunc)();
+    typedef OMX_ERRORTYPE (*DeinitFunc)();
+    typedef OMX_ERRORTYPE (*ComponentNameEnumFunc)(
+            OMX_STRING, OMX_U32, OMX_U32);
+
+    typedef OMX_ERRORTYPE (*GetHandleFunc)(
+            OMX_HANDLETYPE *, OMX_STRING, OMX_PTR, OMX_CALLBACKTYPE *);
+
+    typedef OMX_ERRORTYPE (*FreeHandleFunc)(OMX_HANDLETYPE *);
+
+    typedef OMX_ERRORTYPE (*GetRolesOfComponentFunc)(
+            OMX_STRING, OMX_U32 *, OMX_U8 **);
+
+    InitFunc mInit;
+    DeinitFunc mDeinit;
+    ComponentNameEnumFunc mComponentNameEnum;
+    GetHandleFunc mGetHandle;
+    FreeHandleFunc mFreeHandle;
+    GetRolesOfComponentFunc mGetRolesOfComponentHandle;
+
+    RedroidOMXPlugin(const RedroidOMXPlugin &);
+    RedroidOMXPlugin &operator=(const RedroidOMXPlugin &);
 };
 
 }  // namespace android
