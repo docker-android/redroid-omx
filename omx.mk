@@ -1,4 +1,4 @@
-DEVICE_MANIFEST_FILE += hardware/redroid/omx/android.hardware.media.omx@1.0.xml
+# DEVICE_MANIFEST_FILE += hardware/redroid/omx/android.hardware.media.omx@1.0.xml
 
 # Android U removed, bring back here
 PRODUCT_PACKAGES += \
