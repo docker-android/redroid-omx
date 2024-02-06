@@ -34,7 +34,7 @@ LOCAL_SHARED_LIBRARIES :=       \
         libui                   \
         liblog                  \
 
-LOCAL_MODULE := libstagefrighthw
+LOCAL_MODULE := libstagefrighthw_unused
 
 LOCAL_MULTILIB := 32
 
